@@ -6,8 +6,8 @@
  */
 
 #include <stdio.h>
-#include "msgRGB.h"
-#include "msgRGBServer.h"
+#include "serviceRGB.h"
+#include "serviceRGBServer.h"
 #include "ServiceDispatcherQueue.h"
 
 //#include "log.h"
@@ -18,12 +18,12 @@
 //static char myName[] = "MsgRgbSrv";
 
 msgRGBServer_fpHandles_t *fpMsgRgbSrvHandles = NULL;
-msgRGB_SetRGB_t myColor = {7,8,9};
+msgRGB_SetRGB_t myColor = {'r','g','b'};
 /******************************************************************************
  * PRIVATE FUNCTIONS
  ******************************************************************************/
 
-void HandleSetColour(void *pData)
+void RGBsrv_HandleSetColour(void *pData)
 {
     msgRGB_SetRGB_t * newColor = (msgRGB_SetRGB_t *)pData;
 //    LOG(myName, eLOG_Info, "HandleSetColour: %d, %d, %d",newColor->red, newColor->green, newColor->blue);
@@ -35,7 +35,7 @@ void HandleSetColour(void *pData)
     }
 }
 
-void HandleSetWhite(void *pData)
+void RGBsrv_HandleSetWhite(void *pData)
 {
     msgRGB_SetWhite_t * newWhite = (msgRGB_SetWhite_t *)pData;
 //    LOG(myName, eLOG_Info, "HandleSetWhite: %d",newWhite->white);
@@ -46,7 +46,7 @@ void HandleSetWhite(void *pData)
     }
 }
 
-void HandleGetColour(void *pData)
+void RGBsrv_HandleGetColour(void *pData)
 {
 //    LOG(myName, eLOG_Info, "HandleGetColour: %d, %d, %d",myColor->red, myColor->green, myColor->blue);
 
@@ -54,24 +54,14 @@ void HandleGetColour(void *pData)
 }
 
 /******************************************************************************
- *
- */
-static const RemoteFunctionItem_t msgList_msgRGBServer[] =
-{
-    {eACTION_RGB_SRV_SET_COLOR, HandleSetColour},
-    {eACTION_RGB_SRV_SET_WHITE, HandleSetWhite},
-    {eACTION_RGB_SRV_GET_COLOR, HandleGetColour},
-};
-
-/******************************************************************************
  * INTERFACE FUNCTIONS
  ******************************************************************************/
-void msgRGBServer_Init(fpServiceSubscriber_t fpSubscribe)
+void S_RGBServer_Init(fpServiceSubscriber_t fpSubscribe)
 {
     fpSubscribe((RemoteFunctionItem_t*)msgList_msgRGBServer, sizeof(msgList_msgRGBServer)/sizeof(RemoteFunctionItem_t), eTOPIC_RGB_SERVER, "rgbServer");
 }
 
-void msgRGBServer_SetCallbacks(msgRGBServer_fpHandles_t *handles)
+void S_RGBServer_SetCallbacks(msgRGBServer_fpHandles_t *handles)
 {
     fpMsgRgbSrvHandles = handles;
 }

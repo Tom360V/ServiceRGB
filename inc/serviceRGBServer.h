@@ -25,7 +25,7 @@ typedef struct
 /******************************************************************************
  * INTERFACE FUNCTIONS
  ******************************************************************************/
-void msgRGBServer_Init(fpServiceSubscriber_t fpAddList);
-void msgRGBServer_SetCallbacks(msgRGBServer_fpHandles_t *handles);
+void S_RGBServer_Init(fpServiceSubscriber_t fpAddList);
+void S_RGBServer_SetCallbacks(msgRGBServer_fpHandles_t *handles);
 
 #endif /* MSGRGBSERVER_H_ */
