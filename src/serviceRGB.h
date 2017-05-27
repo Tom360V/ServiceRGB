@@ -16,12 +16,14 @@
  * TYPEDEFS SERVER
  ******************************************************************************/
 void RGBsrv_HandleSetColour (void *pData);
+void RGBsrv_HandleSetColourHex (void *pData);
 void RGBsrv_HandleSetWhite  (void *pData);
 void RGBsrv_HandleGetColour (void *pData);
 
 typedef enum
 {
     eACTION_RGB_SRV_SET_COLOR = 0,
+    eACTION_RGB_SRV_SET_COLOR_HEX,
     eACTION_RGB_SRV_SET_WHITE,
     eACTION_RGB_SRV_GET_COLOR,
 }eACTION_RGB_SRV_t;
@@ -29,6 +31,7 @@ typedef enum
 static const RemoteFunctionItem_t msgList_msgRGBServer[] =
 {
     {eACTION_RGB_SRV_SET_COLOR, RGBsrv_HandleSetColour},
+    {eACTION_RGB_SRV_SET_COLOR_HEX, RGBsrv_HandleSetColourHex},
     {eACTION_RGB_SRV_SET_WHITE, RGBsrv_HandleSetWhite},
     {eACTION_RGB_SRV_GET_COLOR, RGBsrv_HandleGetColour},
 };

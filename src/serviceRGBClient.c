@@ -23,7 +23,7 @@ void RGBclt_HandleGetColor_Response(void *pData)
  ******************************************************************************/
 void S_RGBClient_Init(fpServiceSubscriber_t fpSubscriber)
 {
-    fpSubscriber((RemoteFunctionItem_t*)actions_RGBClient, sizeof(actions_RGBClient)/sizeof(RemoteFunctionItem_t), eTOPIC_RGB_CLIENT, "rgbClient");
+    fpSubscriber((RemoteFunctionItem_t*)actions_RGBClient, sizeof(actions_RGBClient)/sizeof(RemoteFunctionItem_t), eTOPIC_RGB_CLIENT, "rgbClient\0");
 }
 
 void S_RGBClient_SetColor(uint8_t red, uint8_t green, uint8_t blue)
