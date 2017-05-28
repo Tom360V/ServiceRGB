@@ -14,7 +14,7 @@
  * EXTERNAL TYPES
  ******************************************************************************/
 typedef void(*msgRGBServer_fpHandleSetWhite_t)(uint8_t white);
-typedef void(*msgRGBServer_fpHandleSetRGB_t)(uint8_t R, uint8_t G, uint8_t B);
+typedef void(*msgRGBServer_fpHandleSetRGB_t)(uint8_t id, uint8_t R, uint8_t G, uint8_t B);
 
 typedef struct
 {

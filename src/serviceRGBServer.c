@@ -29,15 +29,11 @@ void RGBsrv_HandleSetColour(void *pData)
     msgRGB_SetRGB_t * newColor = (msgRGB_SetRGB_t *)pData;
 //    LOG(myName, eLOG_Info, "HandleSetColour: %d, %d, %d",newColor->red, newColor->green, newColor->blue);
 
-
-    LivingColors_turnLampOnRGB(myLampId, newColor->red, newColor->green, newColor->blue);
-
-
-/*    myColor = *newColor;
+    myColor = *newColor;
     if(fpMsgRgbSrvHandles != 0)
     {
-        fpMsgRgbSrvHandles->setRGB(newColor->red, newColor->green, newColor->blue);
-    }*/
+        fpMsgRgbSrvHandles->setRGB(myLampId, newColor->red, newColor->green, newColor->blue);
+    }
 }
 
 uint8_t ascii2Hex(uint8_t v)
@@ -78,8 +74,10 @@ void RGBsrv_HandleSetColourHex(void *pData)
     }rgbHex;
     rgbHex *newColor = (msgRGB_SetRGB_t *)pData;
 
-
-    LivingColors_turnLampOnRGB(myLampId, asciiHex2int(&newColor->r), asciiHex2int(&newColor->g), asciiHex2int(&newColor->b));
+    if(fpMsgRgbSrvHandles != 0)
+    {
+        fpMsgRgbSrvHandles->setRGB(myLampId, asciiHex2int(&newColor->r), asciiHex2int(&newColor->g), asciiHex2int(&newColor->b));
+    }
 }
 
 void RGBsrv_HandleSetWhite(void *pData)
@@ -106,20 +104,6 @@ void RGBsrv_HandleGetColour(void *pData)
 
 void S_RGBServer_Init(fpServiceSubscriber_t fpSubscribe)
 {
-    unsigned char myLamp[9] = { 0x5B, 0xBF, 0xD5, 0xBA, 0x56, 0x26, 0x67, 0xDB, 0x11 }; //Lamp Tom!
-#ifdef LIVING_COLORS
-    LivingColors_init();
-    LivingColors_clearLamps();
-    LivingColors_addLamp(myLamp);
-
-    LivingColors_turnLampOnRGB(myLampId, 255/*RED*/, 0 /*GREEN*/, 0/*BLUE*/);
-#else
-    
-#endif
-
-
-
-
     fpSubscribe((RemoteFunctionItem_t*)msgList_msgRGBServer, sizeof(msgList_msgRGBServer)/sizeof(RemoteFunctionItem_t), eTOPIC_RGB_SERVER, "rgbServer");
 }
 
